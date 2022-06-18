@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.4
+    container_name: db
+    restart: always
+    ports:
+      - '3310:3306'
+    environment:
+      TZ: Europe/Madrid
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: geotransfer
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+      - ./my.cnf:/etc/my.cnf

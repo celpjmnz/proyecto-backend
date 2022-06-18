@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios {
+  id       Int      @id @default(autoincrement())
+  nombre   String
+  password String
+  Viajes   Viajes[]
+
+  @@map("usuarios")
+}
+
+model Vehiculos {
+  idTipoVehiculo Int      @id @default(autoincrement()) @map("id_tipo_vehiculo")
+  tipoVehiculo   String   @map("tipo_vehiculo")
+  Viajes         Viajes[]
+
+  @@map("vehiculos")
+}
+
+model UsuariosCliente {
+  idUsuarioCliente     Int      @id @default(autoincrement()) @map("id_usuario_cliente")
+  nombreUsuarioCliente String   @map("nombre_usuario_cliente")
+  password             String
+  Viajes               Viajes[]
+
+  @@map("usuariosclientes")
+}
+
+model Viajes {
+  id              Int             @id @default(autoincrement())
+  fecha           DateTime
+  idTipoVehiculo  Int             @map("id_tipo_vehiculo")
+  idCliente       Int             @map("id_cliente")
+  idUsuario       Int             @map("id_usuario")
+  destino         String
+  usuariosCliente UsuariosCliente @relation(fields: [idCliente], references: [idUsuarioCliente])
+  vehiculos       Vehiculos       @relation(fields: [idTipoVehiculo], references: [idTipoVehiculo])
+  usuarios        Usuarios        @relation(fields: [idUsuario], references: [id])
+
+  @@index([idCliente], map: "viajes_id_cliente_fkey")
+  @@index([idTipoVehiculo], map: "viajes_id_tipo_vehiculo_fkey")
+  @@index([idUsuario], map: "viajes_id_usuario_fkey")
+  @@map("viajes")
+}
+
+model ViewViajes {
+  id              Int             @unique
+  fecha           DateTime
+  idTipoVehiculo  Int             @map("id_tipo_vehiculo")
+  idCliente       Int             @map("id_cliente")
+  idUsuario       Int             @map("id_usuario")
+  idConductor     Int             @map("id_conductor")
+  conductor       String
+  idUsuarioCliente Int            @map("id_usuario_cliente")
+  cliente         String    
+  idVehiculo      Int             @map("id_vehiculo")
+  tipoVehiculo    String          @map("tipo_vehiculo")
+  destino         String
+
+  @@map("viewviajes")
+}
