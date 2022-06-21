@@ -7,6 +7,14 @@ export declare class ApiService {
     getViajes(idUsuario: number): Promise<Viaje[]>;
     getViewViajes(): Promise<ViewViajes[]>;
     getUsuarios(): Promise<Usuario[]>;
+    checkUserLogin(data: {
+        nombre: string;
+        password: string;
+    }): Promise<boolean>;
+    checkClientUserLogin(data: {
+        nombreUsuarioCliente: string;
+        password: string;
+    }): Promise<boolean>;
     getUsuariosClientes(): Promise<UsuarioCliente[]>;
     getUsuarioCliente(idUsuarioCliente: any): Promise<UsuarioCliente[]>;
     getVehiculos(): Promise<Vehiculo[]>;

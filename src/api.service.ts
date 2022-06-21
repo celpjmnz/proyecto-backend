@@ -30,6 +30,20 @@ export class ApiService {
     return await this.prisma.usuarios.findMany();
   }
 
+  async checkUserLogin(data: { nombre: string; password: string }): Promise<boolean> {
+    const user = await this.prisma.usuarios.findFirst({ where: { nombre: data.nombre } });
+
+    return bcrypt.compare(data.password, user.password);
+  }
+
+  async checkClientUserLogin(data: { nombreUsuarioCliente: string; password: string }): Promise<boolean> {
+    const user = await this.prisma.usuariosCliente.findFirst({
+      where: { nombreUsuarioCliente: data.nombreUsuarioCliente },
+    });
+
+    return bcrypt.compare(data.password, user.password);
+  }
+
   async getUsuariosClientes(): Promise<UsuarioCliente[]> {
     return await this.prisma.usuariosCliente.findMany();
   }

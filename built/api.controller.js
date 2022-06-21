@@ -28,6 +28,12 @@ let ApiController = class ApiController {
     getUsers() {
         return this.appService.getUsuarios();
     }
+    loginUser(data) {
+        return this.appService.checkUserLogin(data);
+    }
+    loginClientUser(data) {
+        return this.appService.checkClientUserLogin(data);
+    }
     getClientUser(idUsuarioCliente) {
         return this.appService.getUsuarioCliente(idUsuarioCliente);
     }
@@ -75,6 +81,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ApiController.prototype, "getUsers", null);
+__decorate([
+    (0, common_1.Post)('/loginusers'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ApiController.prototype, "loginUser", null);
+__decorate([
+    (0, common_1.Post)('/loginclientusers'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ApiController.prototype, "loginClientUser", null);
 __decorate([
     (0, common_1.Get)('/clientusers/:idUsuarioCliente'),
     __param(0, (0, common_1.Param)('idUsuarioCliente')),

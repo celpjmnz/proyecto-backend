@@ -9,6 +9,14 @@ export declare class ApiController {
     }): Promise<Viaje[]>;
     getViewTravels(): Promise<ViewViajes[]>;
     getUsers(): Promise<Usuario[]>;
+    loginUser(data: {
+        nombre: string;
+        password: string;
+    }): Promise<boolean>;
+    loginClientUser(data: {
+        nombreUsuarioCliente: string;
+        password: string;
+    }): Promise<boolean>;
     getClientUser(idUsuarioCliente: any): Promise<UsuarioCliente[]>;
     getClientUsers(): Promise<UsuarioCliente[]>;
     getVehicles(): Promise<Vehiculo[]>;

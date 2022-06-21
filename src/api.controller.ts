@@ -23,6 +23,15 @@ export class ApiController {
     return this.appService.getUsuarios();
   }
 
+  @Post('/loginusers')
+  loginUser(@Body() data: { nombre: string; password: string }) {
+    return this.appService.checkUserLogin(data);
+  }
+  @Post('/loginclientusers')
+  loginClientUser(@Body() data: { nombreUsuarioCliente: string; password: string }) {
+    return this.appService.checkClientUserLogin(data);
+  }
+
   @Get('/clientusers/:idUsuarioCliente')
   getClientUser(@Param('idUsuarioCliente') idUsuarioCliente): Promise<UsuarioCliente[]> {
     return this.appService.getUsuarioCliente(idUsuarioCliente);

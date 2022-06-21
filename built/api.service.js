@@ -31,6 +31,16 @@ let ApiService = class ApiService {
     async getUsuarios() {
         return await this.prisma.usuarios.findMany();
     }
+    async checkUserLogin(data) {
+        const user = await this.prisma.usuarios.findFirst({ where: { nombre: data.nombre } });
+        return bcrypt.compare(data.password, user.password);
+    }
+    async checkClientUserLogin(data) {
+        const user = await this.prisma.usuariosCliente.findFirst({
+            where: { nombreUsuarioCliente: data.nombreUsuarioCliente },
+        });
+        return bcrypt.compare(data.password, user.password);
+    }
     async getUsuariosClientes() {
         return await this.prisma.usuariosCliente.findMany();
     }
