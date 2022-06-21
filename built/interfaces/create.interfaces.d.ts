@@ -13,3 +13,6 @@ export interface UsuarioClienteParams {
     nombreUsuarioCliente: string;
     password: string;
 }
+export interface VehiculoParams {
+    tipoVehiculo: string;
+}

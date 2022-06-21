@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiService as ApiService } from './api.service';
-import { UsuarioClienteParams, UsuarioParams, ViajeParams } from './interfaces/create.interfaces';
+import { UsuarioClienteParams, UsuarioParams, VehiculoParams, ViajeParams } from './interfaces/create.interfaces';
 import { Usuario, Viaje, UsuarioCliente, Vehiculo, ViewViajes } from './interfaces/db-tables.interfaces';
 import {} from '../dist/interfaces/db-tables.interfaces';
 
@@ -23,6 +23,11 @@ export class ApiController {
     return this.appService.getUsuarios();
   }
 
+  @Get('/clientusers/:idUsuarioCliente')
+  getClientUser(@Param('idUsuarioCliente') idUsuarioCliente): Promise<UsuarioCliente[]> {
+    return this.appService.getUsuarioCliente(idUsuarioCliente);
+  }
+
   @Get('/clientusers')
   getClientUsers(): Promise<UsuarioCliente[]> {
     return this.appService.getUsuariosClientes();
@@ -43,8 +48,23 @@ export class ApiController {
     return this.appService.crearUsuario(data);
   }
 
+  @Post('/vehicles')
+  createVehicle(@Body() data: VehiculoParams): Promise<void> {
+    return this.appService.crearVehiculo(data);
+  }
+
   @Post('/clientusers')
   createClientUser(@Body() data: UsuarioClienteParams): Promise<void> {
     return this.appService.crearUsuarioCliente(data);
+  }
+
+  @Delete('/travels/:id')
+  deleteTravel(@Param('id') id): Promise<void> {
+    return this.appService.deleteViajes(id);
+  }
+
+  @Delete('/vehicles/:idTipoVehiculo')
+  deleteVehiculo(@Param('idTipoVehiculo') idTipoVehiculo): Promise<void> {
+    return this.appService.deleteVehiculos(idTipoVehiculo);
   }
 }

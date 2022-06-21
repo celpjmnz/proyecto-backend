@@ -35,11 +35,11 @@ model UsuariosCliente {
 
 model Viajes {
   id              Int             @id @default(autoincrement())
-  fecha           DateTime
+  fecha           Date            @db.Date
   idTipoVehiculo  Int             @map("id_tipo_vehiculo")
   idCliente       Int             @map("id_cliente")
   idUsuario       Int             @map("id_usuario")
-  destino         String
+  destino         String          @db.VarChar(45)
   usuariosCliente UsuariosCliente @relation(fields: [idCliente], references: [idUsuarioCliente])
   vehiculos       Vehiculos       @relation(fields: [idTipoVehiculo], references: [idTipoVehiculo])
   usuarios        Usuarios        @relation(fields: [idUsuario], references: [id])
@@ -52,7 +52,7 @@ model Viajes {
 
 model ViewViajes {
   id              Int             @unique
-  fecha           DateTime
+  fecha           Date
   idTipoVehiculo  Int             @map("id_tipo_vehiculo")
   idCliente       Int             @map("id_cliente")
   idUsuario       Int             @map("id_usuario")

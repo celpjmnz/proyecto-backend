@@ -28,6 +28,9 @@ let ApiController = class ApiController {
     getUsers() {
         return this.appService.getUsuarios();
     }
+    getClientUser(idUsuarioCliente) {
+        return this.appService.getUsuarioCliente(idUsuarioCliente);
+    }
     getClientUsers() {
         return this.appService.getUsuariosClientes();
     }
@@ -40,8 +43,17 @@ let ApiController = class ApiController {
     createUser(data) {
         return this.appService.crearUsuario(data);
     }
+    createVehicle(data) {
+        return this.appService.crearVehiculo(data);
+    }
     createClientUser(data) {
         return this.appService.crearUsuarioCliente(data);
+    }
+    deleteTravel(id) {
+        return this.appService.deleteViajes(id);
+    }
+    deleteVehiculo(idTipoVehiculo) {
+        return this.appService.deleteVehiculos(idTipoVehiculo);
     }
 };
 __decorate([
@@ -63,6 +75,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ApiController.prototype, "getUsers", null);
+__decorate([
+    (0, common_1.Get)('/clientusers/:idUsuarioCliente'),
+    __param(0, (0, common_1.Param)('idUsuarioCliente')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ApiController.prototype, "getClientUser", null);
 __decorate([
     (0, common_1.Get)('/clientusers'),
     __metadata("design:type", Function),
@@ -90,12 +109,33 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ApiController.prototype, "createUser", null);
 __decorate([
+    (0, common_1.Post)('/vehicles'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ApiController.prototype, "createVehicle", null);
+__decorate([
     (0, common_1.Post)('/clientusers'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ApiController.prototype, "createClientUser", null);
+__decorate([
+    (0, common_1.Delete)('/travels/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ApiController.prototype, "deleteTravel", null);
+__decorate([
+    (0, common_1.Delete)('/vehicles/:idTipoVehiculo'),
+    __param(0, (0, common_1.Param)('idTipoVehiculo')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ApiController.prototype, "deleteVehiculo", null);
 ApiController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [api_service_1.ApiService])

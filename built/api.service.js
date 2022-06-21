@@ -34,8 +34,11 @@ let ApiService = class ApiService {
     async getUsuariosClientes() {
         return await this.prisma.usuariosCliente.findMany();
     }
+    async getUsuarioCliente(idUsuarioCliente) {
+        return this.prisma.usuariosCliente.findMany({ where: { idUsuarioCliente: Number(idUsuarioCliente) } });
+    }
     async getVehiculos() {
-        return await this.prisma.vehiculos.findMany();
+        return this.prisma.vehiculos.findMany();
     }
     async crearViaje(data) {
         await this.prisma.viajes.create({
@@ -54,11 +57,24 @@ let ApiService = class ApiService {
             data: { nombre: data.nombre, password },
         });
     }
+    async crearVehiculo(data) {
+        await this.prisma.vehiculos.create({
+            data: { tipoVehiculo: data.tipoVehiculo },
+        });
+    }
     async crearUsuarioCliente(data) {
         const password = await bcrypt.hash(data.password, 10);
-        await this.prisma.usuarios.create({
-            data: { nombre: data.nombreUsuarioCliente, password },
+        await this.prisma.usuariosCliente.create({
+            data: { nombreUsuarioCliente: data.nombreUsuarioCliente, password },
         });
+    }
+    async deleteViajes(id) {
+        console.log(id);
+        await this.prisma.viajes.delete({ where: { id: Number(id) } });
+    }
+    async deleteVehiculos(idTipoVehiculo) {
+        console.log(idTipoVehiculo);
+        await this.prisma.vehiculos.delete({ where: { idTipoVehiculo: Number(idTipoVehiculo) } });
     }
 };
 ApiService = __decorate([

@@ -1,5 +1,5 @@
 import { ApiService as ApiService } from './api.service';
-import { UsuarioClienteParams, UsuarioParams, ViajeParams } from './interfaces/create.interfaces';
+import { UsuarioClienteParams, UsuarioParams, VehiculoParams, ViajeParams } from './interfaces/create.interfaces';
 import { Usuario, Viaje, UsuarioCliente, Vehiculo, ViewViajes } from './interfaces/db-tables.interfaces';
 export declare class ApiController {
     private readonly appService;
@@ -9,9 +9,13 @@ export declare class ApiController {
     }): Promise<Viaje[]>;
     getViewTravels(): Promise<ViewViajes[]>;
     getUsers(): Promise<Usuario[]>;
+    getClientUser(idUsuarioCliente: any): Promise<UsuarioCliente[]>;
     getClientUsers(): Promise<UsuarioCliente[]>;
     getVehicles(): Promise<Vehiculo[]>;
     createTravel(data: ViajeParams): Promise<void>;
     createUser(data: UsuarioParams): Promise<void>;
+    createVehicle(data: VehiculoParams): Promise<void>;
     createClientUser(data: UsuarioClienteParams): Promise<void>;
+    deleteTravel(id: any): Promise<void>;
+    deleteVehiculo(idTipoVehiculo: any): Promise<void>;
 }
